@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   This file is part of opensearch.
+   Copyright © 2009, Dansk Bibliotekscenter a/s,
+   Tempovej 7-11, DK-2750 Ballerup, Denmark. CVR: 15149043
+
+   opensearch is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   opensearch is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with opensearch.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!-- xsd documenting how to utilize the spell wrapper in test-scenarios. -->
+
+<xsd:schema targetNamespace="http://dbc.dk/xml/namespaces/spell"
+            xmlns="http://dbc.dk/xml/namespaces/spell"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+  <xsd:element name="spell">
+    <xsd:annotation>
+      <xsd:documentation>
+        Calling spell service
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="term" minOccurs="0" maxOccurs="unbounded" type="termType"/>
+      </xsd:sequence>
+      <xsd:attribute name="phrase" use="required" type="xsd:string"/>
+      <xsd:attribute name="maxSuggestions" use="optional" type="xsd:integer"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:complexType name="termType">
+    <xsd:annotation>
+      <xsd:documentation>
+        Calling spell service
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="expected" minOccurs="0" maxOccurs="unbounded" type="expectedType"/>
+        <xsd:element name="notexpected" minOccurs="0" maxOccurs="unbounded" type="notExpectedType"/>
+      </xsd:sequence>
+      <xsd:attribute name="term" use="required" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:complexType>
+
+  <xsd:complexType name="expectedType">
+    <xsd:annotation>
+      <xsd:documentation>
+      Expected suggestion and their weight
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="suggestion" use="required" type="xsd:string"/>
+      <xsd:attribute name="weight" type="xsd:double"/>
+    </xsd:complexType>
+  </xsd:complexType>
+
+  <xsd:complexType name="notExpectedType">
+    <xsd:annotation>
+      <xsd:documentation>
+      Suggestion that should not be present in response
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="suggestion" use="required" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:complexType>
+
+</xsd:schema>
+
+

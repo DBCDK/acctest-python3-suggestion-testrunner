@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   This file is part of opensearch.
+   Copyright © 2009, Dansk Bibliotekscenter a/s,
+   Tempovej 7-11, DK-2750 Ballerup, Denmark. CVR: 15149043
+
+   opensearch is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   opensearch is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with opensearch.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!-- xsd documenting how to utilize the suggest wrapper in test-scenarios. -->
+
+<xsd:schema targetNamespace="http://dbc.dk/xml/namespaces/suggest"
+            xmlns="http://dbc.dk/xml/namespaces/suggest"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+  <xsd:element name="suggest">
+    <xsd:annotation>
+      <xsd:documentation>
+        Calling suggestion service
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="expected" minOccurs="0" maxOccurs="unbounded" type="expectedType"/>
+        <xsd:element name="notexpected" minOccurs="0" maxOccurs="unbounded" type="notExpectedType"/>
+      </xsd:sequence>
+      <xsd:attribute name="term" use="required" type="xsd:string"/>
+      <xsd:attribute name="facet" use="required" type="xsd:string"/>
+      <xsd:attribute name="index" use="optional" type="xsd:string"/>
+      <xsd:attribute name="facetIndex" use="optional" type="xsd:string"/>
+      <xsd:attribute name="lower" use="optional" type="xsd:string"/>
+      <xsd:attribute name="sort" use="optional" type="xsd:integer"/>
+      <xsd:attribute name="maxSuggestions" use="optional" type="xsd:integer"/>
+      <xsd:attribute name="offset" use="optional" type="xsd:integer"/>
+      <xsd:attribute name="filterQuery" use="optional" type="xsd:string"/>
+      <xsd:attribute name="agency" use="optional" type="xsd:string"/>
+      <xsd:attribute name="profile" use="optional" type="xsd:string"/>
+      <xsd:attribute name="highlight" use="optional" type="xsd:boolean"/>
+      <xsd:attribute name="split" use="optional" type="xsd:boolean"/>
+      <xsd:attribute name="highlight.pre" use="optional" type="xsd:string"/>
+      <xsd:attribute name="highlight.post" use="optional" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="suggestspell">
+    <xsd:annotation>
+      <xsd:documentation>
+        Calling suggestion facet spell service
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="expected" minOccurs="0" maxOccurs="unbounded" type="expectedType"/>
+        <xsd:element name="notexpected" minOccurs="0" maxOccurs="unbounded" type="notExpectedType"/>
+      </xsd:sequence>
+      <xsd:attribute name="spell" use="required" type="xsd:string"/>
+      <xsd:attribute name="index" use="optional" type="xsd:string"/>
+      <xsd:attribute name="facetIndex" use="optional" type="xsd:string"/>
+      <xsd:attribute name="cursorPos" use="optional" type="xsd:integer"/>
+      <xsd:attribute name="maxSuggestions" use="optional" type="xsd:integer"/>
+      <xsd:attribute name="filterQuery" use="optional" type="xsd:string"/>
+      <xsd:attribute name="agency" use="optional" type="xsd:string"/>
+      <xsd:attribute name="profile" use="optional" type="xsd:string"/>
+      <xsd:attribute name="rankWeight" use="optional" type="xsd:double"/>
+      <xsd:attribute name="frequencyWeight" use="optional" type="xsd:double"/>
+      <xsd:attribute name="similarityWeight" use="optional" type="xsd:double"/>
+      <xsd:attribute name="highlight" use="optional" type="xsd:boolean"/>
+      <xsd:attribute name="highlight.pre" use="optional" type="xsd:string"/>
+      <xsd:attribute name="highlight.post" use="optional" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="expected">
+    <xsd:annotation>
+      <xsd:documentation>
+      Expected terms and their frequency in the expected order
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="term" use="required" type="xsd:string"/>
+      <xsd:attribute name="frequency" type="xsd:integer"/>
+      <xsd:attribute name="position" type="xsd:integer"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="notexpected">
+    <xsd:annotation>
+      <xsd:documentation>
+      Term that should not be present in response
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="term" use="required" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>
+
+
