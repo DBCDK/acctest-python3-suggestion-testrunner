@@ -1,5 +1,8 @@
 # acctest-python3-suggestion-testrunner
 
+Archived 08/05-2025, Not used by DBC any more
+
+
 ## This is a suggestion-testrunner package
 
 When running stand alone the package-name is taken from the current directory name
